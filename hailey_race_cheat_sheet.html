@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hailey's Race Day Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b2a4a;
+    --paper:#fff8f0;
+    --coral:#ff5e6c;
+    --tangerine:#ff8a3d;
+    --sun:#ffce3a;
+    --mint:#26c4a0;
+    --sky:#2bb3e8;
+    --grape:#8b5cf6;
+    --shadow:rgba(27,42,74,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 12% 8%, #ffe1c4 0%, transparent 40%),
+      radial-gradient(circle at 88% 92%, #c4f3e9 0%, transparent 45%),
+      linear-gradient(135deg,#fff1e6 0%,#fef6ee 50%,#eafbf6 100%);
+    min-height:100vh;
+    padding:28px 16px 50px;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .sheet{max-width:880px;margin:0 auto;}
+
+  /* ---- HEADER ---- */
+  .topper{
+    position:relative;
+    background:linear-gradient(120deg,var(--coral),var(--tangerine) 55%,var(--sun));
+    border-radius:30px;
+    padding:30px 28px 34px;
+    box-shadow:0 14px 0 var(--shadow);
+    overflow:hidden;
+    text-align:center;
+  }
+  .topper::before{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 6px,transparent 6px 64px);
+    opacity:.6;
+  }
+  .topper h1{
+    font-family:'Baloo 2',cursive;
+    font-size:clamp(2rem,6vw,3.4rem);
+    color:#fff;
+    letter-spacing:.5px;
+    line-height:1.05;
+    text-shadow:0 4px 0 rgba(0,0,0,.18);
+    position:relative;
+  }
+  .topper .sub{
+    position:relative;
+    margin-top:6px;
+    font-weight:900;
+    color:#fff;
+    background:rgba(27,42,74,.85);
+    display:inline-block;
+    padding:5px 18px;
+    border-radius:999px;
+    font-size:.95rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  /* ---- EVENT GRID ---- */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:22px;
+  }
+  .card{
+    background:var(--paper);
+    border-radius:24px;
+    padding:20px 20px 22px;
+    box-shadow:0 10px 0 var(--shadow);
+    border:4px solid var(--ink);
+    position:relative;
+  }
+  .card .badge{
+    position:absolute;top:-16px;left:18px;
+    font-family:'Baloo 2',cursive;
+    font-size:1.05rem;
+    color:#fff;
+    padding:4px 16px;
+    border-radius:999px;
+    border:3px solid var(--ink);
+    box-shadow:0 4px 0 var(--shadow);
+  }
+  .c1 .badge{background:var(--coral);}
+  .c2 .badge{background:var(--mint);}
+  .c3 .badge{background:var(--sky);}
+  .c4 .badge{background:var(--grape);}
+
+  .flow{
+    font-family:'Fredoka',sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+    margin:14px 0 12px;
+    letter-spacing:.5px;
+  }
+  .c1 .flow{color:var(--coral);}
+  .c2 .flow{color:var(--mint);}
+  .c3 .flow{color:var(--sky);}
+  .c4 .flow{color:var(--grape);}
+
+  .card ul{list-style:none;counter-reset:step;}
+  .card li{
+    font-weight:800;
+    font-size:1.05rem;
+    padding:6px 0 6px 36px;
+    position:relative;
+    line-height:1.35;
+    counter-increment:step;
+  }
+  .card li::before{
+    content:counter(step);
+    position:absolute;left:0;top:3px;
+    width:24px;height:24px;
+    border-radius:50%;
+    color:#fff;
+    font-family:'Baloo 2',cursive;
+    font-size:.88rem;
+    font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .c1 li::before{background:var(--coral);}
+  .c2 li::before{background:var(--mint);}
+  .c3 li::before{background:var(--sky);}
+  .c4 li::before{background:var(--grape);}
+
+  .think{
+    margin-top:14px;
+    font-family:'Baloo 2',cursive;
+    font-size:1.14rem;
+    background:var(--sun);
+    color:var(--ink);
+    border-radius:14px;
+    padding:8px 14px;
+    text-align:center;
+    border:3px solid var(--ink);
+  }
+
+  /* ---- WIDE PANELS ---- */
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;}
+  .panel{
+    border-radius:24px;
+    padding:22px 22px 24px;
+    border:4px solid var(--ink);
+    box-shadow:0 10px 0 var(--shadow);
+  }
+  .panel h2{
+    font-family:'Baloo 2',cursive;
+    font-size:1.4rem;
+    margin-bottom:12px;
+    text-align:center;
+  }
+  .every{background:linear-gradient(135deg,#e7fbf5,#d2f6ec);}
+  .every .cues{display:flex;flex-direction:column;gap:9px;}
+  .every .cue{
+    font-weight:800;font-size:1.02rem;
+    background:#fff;border-radius:12px;padding:8px 14px;
+    border:2px solid var(--ink);
+  }
+  .hard{background:linear-gradient(135deg,#fff0f1,#ffe0e3);}
+  .hard .mantra{
+    font-family:'Baloo 2',cursive;
+    font-size:1.12rem;
+    text-align:center;
+    padding:7px 0;
+    color:var(--coral);
+  }
+  .hard .mantra + .mantra{border-top:2px dashed rgba(27,42,74,.25);}
+
+  /* ---- GOLDEN RULE ---- */
+  .golden{
+    margin-top:18px;
+    background:linear-gradient(120deg,var(--grape),var(--sky));
+    border-radius:26px;
+    padding:24px 22px 26px;
+    border:4px solid var(--ink);
+    box-shadow:0 12px 0 var(--shadow);
+    text-align:center;
+    color:#fff;
+  }
+  .golden h2{font-family:'Baloo 2',cursive;font-size:1.5rem;text-shadow:0 3px 0 rgba(0,0,0,.18);}
+  .rules{
+    display:grid;grid-template-columns:repeat(2,1fr);
+    gap:10px;margin:16px 0 6px;
+  }
+  .rule{
+    background:rgba(255,255,255,.95);
+    color:var(--ink);
+    border-radius:14px;
+    padding:9px 10px;
+    font-weight:900;
+    font-size:.98rem;
+  }
+  .rule b{display:block;font-family:'Baloo 2',cursive;font-size:1.05rem;}
+  .motto{
+    margin-top:8px;
+    font-family:'Baloo 2',cursive;
+    font-size:1.3rem;
+    letter-spacing:1px;
+    text-shadow:0 3px 0 rgba(0,0,0,.18);
+  }
+
+  @media (max-width:640px){
+    .grid,.row,.rules{grid-template-columns:1fr;}
+  }
+  @media print{
+    @page{size:A4 portrait;margin:8mm;}
+    html,body{height:auto;}
+    body{padding:0;background:#fff;}
+    .sheet{max-width:100%;}
+    .topper{padding:14px 20px 16px;border-radius:18px;}
+    .topper h1{font-size:1.85rem;}
+    .topper .sub{font-size:.78rem;padding:3px 14px;}
+    .grid{gap:10px;margin-top:13px;}
+    .card{padding:12px 14px 13px;border-radius:16px;border-width:3px;}
+    .card .badge{font-size:.88rem;top:-13px;padding:3px 12px;}
+    .flow{font-size:.9rem;margin:9px 0 7px;}
+    .card li{font-size:.9rem;padding:3px 0 3px 28px;line-height:1.25;}
+    .card li::before{width:19px;height:19px;font-size:.74rem;top:2px;}
+    .think{font-size:.95rem;margin-top:9px;padding:5px 10px;}
+    .row{gap:10px;margin-top:10px;}
+    .panel{padding:12px 14px 13px;border-radius:16px;border-width:3px;}
+    .panel h2{font-size:1.1rem;margin-bottom:8px;}
+    .every .cues{gap:6px;}
+    .every .cue{font-size:.86rem;padding:5px 10px;}
+    .hard .mantra{font-size:.95rem;padding:4px 0;}
+    .golden{margin-top:10px;padding:14px 16px 15px;border-radius:18px;border-width:3px;}
+    .golden h2{font-size:1.15rem;}
+    .rules{gap:7px;margin:10px 0 4px;}
+    .rule{padding:6px 8px;font-size:.84rem;}
+    .rule b{font-size:.92rem;}
+    .motto{font-size:1.05rem;margin-top:6px;}
+    .card,.panel,.golden,.topper{box-shadow:none;break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topper">
+    <h1>🏃‍♀️ Hailey's Race Day Cheat Sheet 🏃‍♀️</h1>
+    <div class="sub">Run Hard · Have Fun · Be Proud</div>
+  </div>
+
+  <div class="grid">
+    <div class="card c1">
+      <span class="badge">100 m</span>
+      <div class="flow">GO → FLY → FINISH</div>
+      <ul>
+        <li>Explode out of the start</li>
+        <li>Pump your arms fast</li>
+        <li>Run through the finish line</li>
+        <li>Never slow down early</li>
+      </ul>
+      <div class="think">💭 “Run as fast as I can!”</div>
+    </div>
+
+    <div class="card c2">
+      <span class="badge">200 m</span>
+      <div class="flow">FAST → HOLD → FINISH</div>
+      <ul>
+        <li>Start fast and relaxed</li>
+        <li>Stay smooth on the curve</li>
+        <li>Keep pushing to the finish</li>
+      </ul>
+      <div class="think">💭 “Fast and strong!”</div>
+    </div>
+
+    <div class="card c3">
+      <span class="badge">400 m</span>
+      <div class="flow">FAST → RELAX → FIGHT → SPRINT</div>
+      <ul>
+        <li>Fast first 100m</li>
+        <li>Relax and find your rhythm</li>
+        <li>Stay tough when it gets hard</li>
+        <li>Sprint the last 100m</li>
+      </ul>
+      <div class="think">💭 “Relax, then attack!”</div>
+    </div>
+
+    <div class="card c4">
+      <span class="badge">800 m</span>
+      <div class="flow">FAST → SETTLE → PUSH → KICK</div>
+      <ul>
+        <li>Good start</li>
+        <li>Find your pace</li>
+        <li>Stay strong in the middle</li>
+        <li>Sprint the last 200m</li>
+      </ul>
+      <div class="think">💭 “Easy, easy, GO!”</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="panel every">
+      <h2>⭐ Every Race ⭐</h2>
+      <div class="cues">
+        <div class="cue">👀 Eyes Up</div>
+        <div class="cue">💪 Pump Your Arms</div>
+        <div class="cue">🦵 Quick Feet</div>
+        <div class="cue">😊 Stay Relaxed</div>
+        <div class="cue">❤️ Never Give Up</div>
+      </div>
+    </div>
+
+    <div class="panel hard">
+      <h2>💭 When It Gets Hard</h2>
+      <div class="mantra">“I am strong.”</div>
+      <div class="mantra">“I can do this.”</div>
+      <div class="mantra">“I keep moving.”</div>
+      <div class="mantra">“I finish fast.”</div>
+    </div>
+  </div>
+
+  <div class="golden">
+    <h2>🏁 Golden Rule 🏁</h2>
+    <div class="rules">
+      <div class="rule"><b>100 m</b>Sprint</div>
+      <div class="rule"><b>200 m</b>Controlled Sprint</div>
+      <div class="rule"><b>400 m</b>Speed + Strength</div>
+      <div class="rule"><b>800 m</b>Pace + Kick</div>
+    </div>
+    <div class="motto">Run Hard. Have Fun. Be Proud! 🌟</div>
+  </div>
+
+</div>
+</body>
+</html>
