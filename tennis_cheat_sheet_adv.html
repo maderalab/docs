@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennis Cheat Sheet · Advanced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Schibsted+Grotesk:wght@300;400;500;700&family=Archivo+Black&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* US Open theme — signature blue court, white lines, optic-yellow ball */
+    --bg:#06183a;            /* US Open deep navy */
+    --bg-2:#0a2150;
+    --surface:#0e2860;
+    --surface-2:#143575;
+    --line:#2c4f96;
+    --ink:#eef4ff;
+    --ink-soft:#b2c4e8;
+    --ink-faint:#7689b8;
+    --accent:#d4ff3f;        /* optic tennis yellow (the ball) */
+    --accent-2:#4d97ff;      /* US Open bright blue */
+    --court:#3f78c4;         /* US Open court blue */
+    --court-line:#ffffff;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:1.5rem;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(900px 520px at 88% -10%, rgba(212,255,63,.10), transparent 60%),
+      radial-gradient(760px 520px at -6% 112%, rgba(77,151,255,.16), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Schibsted Grotesk",system-ui,sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:1200px;margin:0 auto;
+    padding:0 clamp(1rem,4vw,3rem) 5rem;
+    display:grid;grid-template-columns:240px 1fr;
+    gap:clamp(1.5rem,4vw,3.5rem);align-items:start;
+  }
+  header.hero{
+    grid-column:1 / -1;
+    padding:clamp(3rem,8vw,6rem) 0 2.5rem;
+    border-bottom:1px solid var(--line);position:relative;
+  }
+  header.hero .kicker{
+    font-family:"JetBrains Mono",monospace;
+    letter-spacing:.4em;text-transform:uppercase;
+    font-size:.7rem;color:var(--accent);margin:0 0 1rem;
+  }
+  header.hero h1{
+    font-family:"Fraunces",serif;font-weight:900;
+    font-size:clamp(2.6rem,8.5vw,5.6rem);line-height:1.0;
+    margin:0;letter-spacing:-.02em;
+  }
+  header.hero h1 .en{
+    font-family:"Archivo Black",sans-serif;
+    color:var(--accent);font-weight:400;letter-spacing:0;font-style:normal;
+  }
+  header.hero p.sub{
+    color:var(--ink-soft);max-width:52ch;
+    margin:1.25rem 0 0;font-size:1.05rem;
+  }
+  .badge{
+    display:inline-block;margin-top:1.1rem;
+    font-family:"JetBrains Mono",monospace;font-size:.72rem;
+    letter-spacing:.1em;color:var(--bg);background:var(--accent);
+    padding:.3rem .7rem;border-radius:99px;font-weight:500;
+  }
+  nav.toc{
+    position:sticky;top:1.5rem;
+    font-family:"JetBrains Mono",monospace;font-size:.78rem;
+    display:flex;flex-direction:column;gap:.15rem;
+    max-height:calc(100vh - 3rem);overflow-y:auto;padding-right:.25rem;
+  }
+  nav.toc .label{
+    color:var(--ink-faint);text-transform:uppercase;
+    letter-spacing:.2em;font-size:.62rem;margin:0 0 .6rem .55rem;
+  }
+  nav.toc a{
+    color:var(--ink-soft);text-decoration:none;
+    padding:.32rem .6rem;border-radius:8px;
+    border-left:2px solid transparent;transition:all .18s ease;
+  }
+  nav.toc a:hover{color:var(--ink);background:var(--surface);}
+  nav.toc a.active{color:var(--accent);border-left-color:var(--accent);background:var(--surface);}
+  main{display:flex;flex-direction:column;gap:1.4rem;min-width:0;}
+  .card{
+    background:linear-gradient(180deg,var(--surface),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:1.6rem clamp(1rem,2.5vw,2rem) 1.8rem;
+    scroll-margin-top:1.5rem;position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.7;
+  }
+  .card h2{
+    font-family:"Fraunces",serif;font-weight:700;font-size:1.5rem;
+    margin:.1rem 0 1.1rem;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.6rem;
+  }
+  .card h2 .num{
+    font-family:"JetBrains Mono",monospace;font-size:.85rem;
+    color:var(--accent);font-weight:500;
+  }
+  .card h3{
+    font-weight:700;font-size:1rem;color:var(--accent-2);
+    margin:1.4rem 0 .5rem;letter-spacing:.01em;
+  }
+  .card p{color:var(--ink-soft);margin:0 0 .8rem;}
+  .card strong{color:var(--ink);font-weight:700;}
+  ul.clean{list-style:none;margin:0 0 .6rem;padding:0;}
+  ul.clean li{
+    position:relative;padding:.28rem 0 .28rem 1.4rem;
+    color:var(--ink-soft);border-bottom:1px dashed rgba(35,72,100,.55);
+  }
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li::before{
+    content:"";position:absolute;left:.1rem;top:.95rem;
+    width:.5rem;height:.5rem;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 3px rgba(212,255,63,.15);
+  }
+  ul.clean li b{color:var(--ink);font-weight:700;}
+  table{border-collapse:collapse;width:100%;margin:.4rem 0 .8rem;font-size:.92rem;}
+  th,td{
+    text-align:left;padding:.55rem .7rem;
+    border-bottom:1px solid var(--line);vertical-align:top;
+  }
+  th{
+    color:var(--accent);font-weight:700;font-size:.74rem;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  td{color:var(--ink-soft);}
+  td b{color:var(--ink);}
+  tr:last-child td{border-bottom:none;}
+  .key{color:var(--accent-2);font-weight:700;white-space:nowrap;}
+  .tip{
+    border-left:3px solid var(--accent);
+    background:rgba(212,255,63,.06);
+    padding:.7rem .9rem;border-radius:0 8px 8px 0;
+    margin:.8rem 0;color:var(--ink-soft);font-size:.92rem;
+  }
+  .tip b{color:var(--accent);}
+  .court-wrap{margin:.5rem 0 .4rem;text-align:center;}
+  .court-wrap svg{width:100%;max-width:560px;height:auto;}
+  .court-cap{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--ink-faint);margin-top:.4rem;}
+  .glossary{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:.2rem .8rem;
+  }
+  .glossary div{
+    padding:.4rem 0;border-bottom:1px dashed rgba(35,72,100,.55);
+    color:var(--ink-soft);font-size:.9rem;
+  }
+  .glossary div b{color:var(--accent-2);font-weight:700;}
+  footer{
+    grid-column:1 / -1;margin-top:2.5rem;padding-top:1.5rem;
+    border-top:1px solid var(--line);color:var(--ink-faint);
+    font-family:"JetBrains Mono",monospace;font-size:.76rem;text-align:center;
+  }
+  @media(max-width:860px){
+    .wrap{grid-template-columns:1fr;}
+    nav.toc{position:static;flex-flow:row wrap;max-height:none;gap:.35rem;padding-bottom:.5rem;}
+    nav.toc .label{width:100%;margin-left:0;}
+    nav.toc a{border-left:none;border:1px solid var(--line);}
+    nav.toc a.active{border-color:var(--accent);}
+  }
+  ::-webkit-scrollbar{height:8px;width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker">Quick Reference</p>
+      <h1>Tennis Cheat Sheet</h1>
+      <p class="sub">For adult players with a foundation: technique detail, spin mechanics, singles &amp; doubles tactics, surfaces, equipment, the mental game, and conditioning — all on one page.</p>
+      <span class="badge">ADVANCED EDITION</span>
+    </header>
+
+    <nav class="toc" aria-label="Sections">
+      <p class="label">Contents</p>
+      <a href="#court">① Court &amp; Zones</a>
+      <a href="#score">② Scoring &amp; Rules</a>
+      <a href="#grip">③ Grips</a>
+      <a href="#forehand">④ Forehand</a>
+      <a href="#backhand">⑤ Backhand</a>
+      <a href="#serve">⑥ Serve</a>
+      <a href="#return">⑦ Return of Serve</a>
+      <a href="#net">⑧ Volley &amp; Overhead</a>
+      <a href="#shots">⑨ Special Shots</a>
+      <a href="#spin">⑩ Spin Mechanics</a>
+      <a href="#footwork">⑪ Footwork &amp; Movement</a>
+      <a href="#singles">⑫ Singles Tactics</a>
+      <a href="#doubles">⑬ Doubles Tactics</a>
+      <a href="#surface">⑭ Surfaces</a>
+      <a href="#gear">⑮ Equipment</a>
+      <a href="#mental">⑯ Mental &amp; Match Play</a>
+      <a href="#fitness">⑰ Conditioning</a>
+      <a href="#terms">⑱ Terminology</a>
+    </nav>
+
+    <main>
+      <!-- 1 court -->
+      <section id="court" class="card">
+        <h2><span class="num">01</span>Court &amp; Zones</h2>
+        <div class="court-wrap">
+          <svg viewBox="0 0 540 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top-down tennis court diagram">
+            <rect x="20" y="18" width="500" height="234" rx="6" fill="#0a2150"/>
+            <rect x="40" y="34" width="460" height="202" fill="#3f78c4" stroke="#ffffff" stroke-width="2.5"/>
+            <line x1="40" y1="60" x2="500" y2="60" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="40" y1="210" x2="500" y2="210" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="270" y1="28" x2="270" y2="242" stroke="#d4ff3f" stroke-width="3" stroke-dasharray="4 4"/>
+            <line x1="146" y1="60" x2="146" y2="210" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="394" y1="60" x2="394" y2="210" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="146" y1="135" x2="394" y2="135" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="40" y1="135" x2="52" y2="135" stroke="#eaf4ff" stroke-width="2"/>
+            <line x1="488" y1="135" x2="500" y2="135" stroke="#eaf4ff" stroke-width="2"/>
+            <text x="93" y="100" fill="#cfe6ff" font-size="9.5" font-family="monospace" text-anchor="middle">SERVICE BOX</text>
+            <text x="93" y="178" fill="#cfe6ff" font-size="9.5" font-family="monospace" text-anchor="middle">SERVICE BOX</text>
+            <text x="270" y="20" fill="#d4ff3f" font-size="10" font-family="monospace" text-anchor="middle">NET</text>
+            <text x="50" y="50" fill="#9fc4e6" font-size="9" font-family="monospace">BASELINE</text>
+            <text x="400" y="135" fill="#9fc4e6" font-size="9" font-family="monospace">T</text>
+          </svg>
+        </div>
+        <p class="court-cap">Standard court (top-down) · proportions approximate</p>
+        <table>
+          <tr><td class="key">Length</td><td><b>23.77 m</b> (baseline to baseline)</td></tr>
+          <tr><td class="key">Doubles width</td><td><b>10.97 m</b></td></tr>
+          <tr><td class="key">Singles width</td><td><b>8.23 m</b></td></tr>
+          <tr><td class="key">Net height</td><td><b>0.914 m</b> at center, 1.07 m at posts</td></tr>
+          <tr><td class="key">Service line</td><td><b>6.40 m</b> from net; with the center line it frames the service boxes</td></tr>
+        </table>
+        <div class="tip"><b>Zone memory:</b> right half = <b>Deuce</b> court (served on at deuce / odd point totals), left half = <b>Ad</b> court. Placement terms: down the middle = <b>T</b>, tight to the sideline = <b>Wide</b>, straight at the returner = <b>Body</b>.</div>
+      </section>
+
+      <!-- 2 score -->
+      <section id="score" class="card">
+        <h2><span class="num">02</span>Scoring &amp; Rules</h2>
+        <h3>Point · Game · Set</h3>
+        <table>
+          <tr><th>Level</th><th>Rule</th></tr>
+          <tr><td><b>Point</b></td><td>0 (Love) → 15 → 30 → 40 → win the game</td></tr>
+          <tr><td><b>Deuce</b></td><td>At 40-40 you must win by 2: Advantage → next point wins</td></tr>
+          <tr><td><b>Game</b></td><td>First to meet the above wins one game</td></tr>
+          <tr><td><b>Set</b></td><td>First to 6 games leading by ≥2; at 6-6 play a tiebreak</td></tr>
+          <tr><td><b>Tiebreak</b></td><td>First to 7 points leading by ≥2; serve 1 point, then alternate every 2</td></tr>
+        </table>
+        <h3>Format notes</h3>
+        <ul class="clean">
+          <li><b>Best of 3:</b> most events and women's Grand Slams. <b>Best of 5:</b> men's Grand Slams.</li>
+          <li><b>Super tiebreak (to 10):</b> often replaces a deciding set in doubles.</li>
+          <li><b>Deciding-set tiebreak:</b> all four Slams now use a <b>10-point</b> tiebreak at 6-6 in the final set.</li>
+          <li><b>No-ad scoring:</b> some leagues/doubles play a single deciding point at 40-40 — receiver chooses the side.</li>
+          <li><b>Serve rotation:</b> switch server each game; change ends after odd-numbered games (1, 3, 5…).</li>
+          <li><b>Tiebreak serving:</b> first server serves 1 point (from deuce side), then players alternate <b>2 serves each</b>; change ends every 6 points.</li>
+          <li><b>Let:</b> a serve that clips the net and still lands in is replayed — no fault, score unchanged.</li>
+        </ul>
+      </section>
+
+      <!-- 3 grip -->
+      <section id="grip" class="card">
+        <h2><span class="num">03</span>Grips</h2>
+        <p>Defined by which of the handle's eight bevels the base knuckle of the index finger sits on.</p>
+        <table>
+          <tr><th>Grip</th><th>Bevel</th><th>Use / Character</th></tr>
+          <tr><td><b>Continental</b></td><td>2</td><td>Serve, volley, overhead, slice, defense — the all-purpose grip</td></tr>
+          <tr><td><b>Eastern forehand</b></td><td>3</td><td>Flat power, quick to net, forgiving; suits attacking styles</td></tr>
+          <tr><td><b>Semi-Western</b></td><td>4</td><td>Modern forehand standard — heavy topspin with power</td></tr>
+          <tr><td><b>Western</b></td><td>5</td><td>Extreme topspin, loves high contact; tough on low balls</td></tr>
+          <tr><td><b>Eastern backhand / 2H top hand</b></td><td>1</td><td>Main one-hander grip; the non-dominant hand on a two-hander uses it</td></tr>
+        </table>
+        <div class="tip"><b>Two-handed backhand:</b> the bottom (dominant) hand typically uses Continental, the top (non-dominant) hand uses an Eastern forehand — it's essentially "a forehand with your off hand."</div>
+      </section>
+
+      <!-- 4 forehand -->
+      <section id="forehand" class="card">
+        <h2><span class="num">04</span>Forehand</h2>
+        <ul class="clean">
+          <li><b>Unit turn:</b> rotate shoulders and hips together to prepare — not just the arm swinging back.</li>
+          <li><b>Swing path:</b> low-to-high produces topspin; make contact <b>out in front</b>, to the side.</li>
+          <li><b>Stance:</b> open stance aids recovery and power; closed stance favors penetrating down-the-line balls.</li>
+          <li><b>Kinetic chain:</b> push off ground → rotate hips → rotate shoulders → swing arm → <b>wrist lag &amp; snap</b>.</li>
+          <li><b>Follow-through:</b> finish over the opposite shoulder (windshield-wiper motion adds spin).</li>
+        </ul>
+        <div class="tip"><b>Common faults:</b> contact too late, all-arm swinging, lifting the head early. <b>Track the ball to the strings</b> before you commit to power.</div>
+      </section>
+
+      <!-- 5 backhand -->
+      <section id="backhand" class="card">
+        <h2><span class="num">05</span>Backhand</h2>
+        <h3>Two-handed</h3>
+        <ul class="clean">
+          <li>Stable, easy to load topspin; the top hand drives the swing like an off-hand forehand.</li>
+          <li>Full rotation, weight moving forward, contact slightly farther forward than the forehand.</li>
+        </ul>
+        <h3>One-handed</h3>
+        <ul class="clean">
+          <li>Greater reach and contact flexibility, smooth transition to slice and net; harder on high and heavy balls.</li>
+          <li>Contact well <b>in front</b>, hitting arm extended, off hand back for balance.</li>
+        </ul>
+        <h3>Backhand slice</h3>
+        <ul class="clean">
+          <li>High-to-low with a slightly open face creates <b>backspin</b>; the ball stays low and floats — great for changing pace, defending, and setting up approaches.</li>
+        </ul>
+      </section>
+
+      <!-- 6 serve -->
+      <section id="serve" class="card">
+        <h2><span class="num">06</span>Serve</h2>
+        <p>Always use the <b>Continental</b> grip; forearm <b>pronation</b> generates speed and spin. A consistent toss is the foundation of everything.</p>
+        <table>
+          <tr><th>Type</th><th>Spin</th><th>Use</th></tr>
+          <tr><td><b>Flat</b></td><td>Almost none</td><td>First-serve weapon, hunting aces; toss slightly more forward</td></tr>
+          <tr><td><b>Slice</b></td><td>Sidespin</td><td>Pulls the returner wide (especially from the deuce court); low bounce</td></tr>
+          <tr><td><b>Kick / Topspin</b></td><td>Topspin + side</td><td>Go-to second serve: clears the net high, bounces high and away — safe and reliable</td></tr>
+        </table>
+        <h3>Placement combos (tied to tactics)</h3>
+        <ul class="clean">
+          <li><b>T:</b> compresses the returner's angle, sets up your next-ball attack or approach.</li>
+          <li><b>Body:</b> straight at the returner, forcing an awkward reply — very effective in doubles.</li>
+          <li><b>Wide:</b> opens the court to create space for the following shot.</li>
+        </ul>
+        <div class="tip"><b>1st / 2nd serve strategy:</b> first serve chases quality (placement + speed); the second serve prioritizes <b>reliable spin and placement</b> over just getting it in. Cutting double faults is what wins matches.</div>
+      </section>
+
+      <!-- 7 return -->
+      <section id="return" class="card">
+        <h2><span class="num">07</span>Return of Serve</h2>
+        <p>The return is the second-most-hit shot in tennis — getting it back in play already wins points against most amateurs. <b>Split step as the server makes contact.</b></p>
+        <table>
+          <tr><th>Situation</th><th>Position</th><th>Goal</th></tr>
+          <tr><td><b>1st serve</b></td><td>Deeper, near/behind baseline</td><td>Block / chip deep, neutralize — just start the rally</td></tr>
+          <tr><td><b>2nd serve</b></td><td>Step inside the baseline</td><td>Take time away, drive deep or attack, dictate</td></tr>
+        </table>
+        <ul class="clean">
+          <li><b>Block return:</b> short, firm punch — like a volley off the bounce — for big first serves.</li>
+          <li><b>Chip &amp; charge:</b> slice the return low and follow it to net to pressure a weak second serve.</li>
+          <li><b>Read cues:</b> watch toss placement and stance; on kick serves move up and take it before it climbs.</li>
+          <li><b>Targets:</b> cross-court is the high-percentage default (longer court, lower net); down-the-line to surprise.</li>
+        </ul>
+        <div class="tip"><b>Doubles return:</b> get it low — at the net player's feet or cross-court past them — to deny an easy poach, then move in.</div>
+      </section>
+
+      <!-- 8 net -->
+      <section id="net" class="card">
+        <h2><span class="num">08</span>Volley &amp; Overhead</h2>
+        <h3>Volley</h3>
+        <ul class="clean">
+          <li>Continental grip, <b>block don't swing</b>; contact in front of the body with a very short backswing.</li>
+          <li>Slightly open face for underspin and depth; step forward into the ball off your split step.</li>
+          <li>On low balls bend the knees, drop your level, open the face to carry the ball over.</li>
+        </ul>
+        <h3>Overhead / Smash</h3>
+        <ul class="clean">
+          <li>Turn sideways, point at the ball with the off hand to track it, then swing like a serve.</li>
+          <li>Use <b>shuffle / crossover</b> steps to get under the ball; aim deep cross-court or into open space.</li>
+        </ul>
+      </section>
+
+      <!-- 9 special shots -->
+      <section id="shots" class="card">
+        <h2><span class="num">09</span>Special Shots</h2>
+        <table>
+          <tr><th>Shot</th><th>How</th><th>When</th></tr>
+          <tr><td><b>Half-volley</b></td><td>Short backswing, soft hands, contact just after the bounce; bend low</td><td>Caught at your feet in the transition zone</td></tr>
+          <tr><td><b>Swinging volley</b></td><td>Full topspin swing on a floating ball before it bounces</td><td>Attack a weak, high reply while moving in</td></tr>
+          <tr><td><b>Drop shot</b></td><td>Open face, backspin, soft touch landing just over the net</td><td>Opponent deep/tired; disguise it like a normal stroke</td></tr>
+          <tr><td><b>Lob (defensive)</b></td><td>High and deep to reset the point</td><td>Pushed wide/off-balance against a net player</td></tr>
+          <tr><td><b>Lob (offensive)</b></td><td>Topspin lob over the net player's reach, dipping in</td><td>Net player crowding in — drives them back or wins outright</td></tr>
+        </table>
+        <div class="tip"><b>Disguise is everything:</b> the best drop shots and lobs look identical to a drive until the last instant. Same prep, change only at contact.</div>
+      </section>
+
+      <!-- 10 spin -->
+      <section id="spin" class="card">
+        <h2><span class="num">10</span>Spin Mechanics</h2>
+        <table>
+          <tr><th>Spin</th><th>Swing</th><th>Flight / Bounce</th><th>Tactical value</th></tr>
+          <tr><td><b>Topspin</b></td><td>Low → high</td><td>Dips over net, high bounce</td><td>Forgiving, lets you hit big and force high contact</td></tr>
+          <tr><td><b>Slice</b></td><td>High → low</td><td>Low, floating, skids</td><td>Change of pace, defense, approach setup, returns</td></tr>
+          <tr><td><b>Flat</b></td><td>Level / linear</td><td>Fast, flat trajectory</td><td>Finishing weapon, but low margin</td></tr>
+        </table>
+        <div class="tip"><b>Magnus effect:</b> topspin creates a pressure difference above and below the ball, pulling it down faster — which is why you can hit hard <em>and</em> keep it in.</div>
+      </section>
+
+      <!-- 11 footwork -->
+      <section id="footwork" class="card">
+        <h2><span class="num">11</span>Footwork &amp; Movement</h2>
+        <ul class="clean">
+          <li><b>Split step:</b> a small hop landing the <b>instant</b> your opponent strikes, loading to push off any direction.</li>
+          <li><b>Adjustment steps:</b> small steps once you arrive, dialing in the ideal spacing to the ball.</li>
+          <li><b>Movement type:</b> shuffle for short distances, crossover steps for covering ground fast.</li>
+          <li><b>Recovery:</b> after hitting, move back along the <b>bisector</b> of your opponent's possible angles, not straight to the center mark.</li>
+          <li><b>Timing:</b> taking the ball on the rise steals time; at the peak is most stable; on the drop you're defending.</li>
+        </ul>
+      </section>
+
+      <!-- 12 singles -->
+      <section id="singles" class="card">
+        <h2><span class="num">12</span>Singles Tactics</h2>
+        <ul class="clean">
+          <li><b>Percentage tennis:</b> most points are lost to unforced errors. Build with <b>consistent depth</b> first, then look to attack.</li>
+          <li><b>Control the middle:</b> deep balls pin the opponent behind the baseline and limit their angles.</li>
+          <li><b>Move &amp; open angles:</b> work them side to side, then finish cross-court or down the line into the gap.</li>
+          <li><b>Attack the weakness:</b> most amateurs are weaker on the backhand — apply steady pressure and change direction.</li>
+          <li><b>Finish at net:</b> use an approach shot to close in and cut down the opponent's reaction time.</li>
+          <li><b>Serve patterns:</b> serve + forehand (serve+1) to attack, or serve-and-volley.</li>
+          <li><b>Returns:</b> adjust position to serve quality; attack the second serve by stepping in.</li>
+        </ul>
+      </section>
+
+      <!-- 13 doubles -->
+      <section id="doubles" class="card">
+        <h2><span class="num">13</span>Doubles Tactics</h2>
+        <h3>Formations</h3>
+        <ul class="clean">
+          <li><b>One up, one back:</b> common base setup; the serving team's net player looks to poach.</li>
+          <li><b>Both up:</b> the attacking posture — control the net and seize the midcourt.</li>
+          <li><b>I-formation / Australian:</b> net player straddles the center line to scramble the returner's targets.</li>
+        </ul>
+        <h3>Core play</h3>
+        <ul class="clean">
+          <li><b>Poach:</b> the net player cuts laterally to intercept the return for a surprise put-away.</li>
+          <li><b>Return and approach:</b> follow the return forward to contest the net.</li>
+          <li><b>Hit the middle / at the feet:</b> low balls that force awkward replies between or below the opponents.</li>
+          <li><b>Communicate:</b> use hand signals before each point to set poaching and who covers the middle.</li>
+        </ul>
+      </section>
+
+      <!-- 14 surfaces -->
+      <section id="surface" class="card">
+        <h2><span class="num">14</span>Surfaces</h2>
+        <table>
+          <tr><th>Surface</th><th>Speed / Bounce</th><th>Plays into</th></tr>
+          <tr><td><b>Clay</b></td><td>Slow, high bounce; you can <b>slide</b></td><td>Topspin grinders, patience, long rallies, defense; drop shots bite</td></tr>
+          <tr><td><b>Hard</b></td><td>Medium, true &amp; predictable bounce</td><td>All-court games — the neutral test of complete tennis</td></tr>
+          <tr><td><b>Grass</b></td><td>Fast, low, skidding bounce</td><td>Big serves, slice, serve-and-volley, short points</td></tr>
+        </table>
+        <div class="tip"><b>Adjust your game:</b> on slow courts add margin and grind; on fast/low courts bend your knees, shorten the backswing, and look to the net earlier.</div>
+      </section>
+
+      <!-- 15 equipment -->
+      <section id="gear" class="card">
+        <h2><span class="num">15</span>Equipment</h2>
+        <h3>Racket</h3>
+        <table>
+          <tr><th>Spec</th><th>Effect</th></tr>
+          <tr><td class="key">Head size</td><td>Larger = more power &amp; forgiveness; smaller = more control</td></tr>
+          <tr><td class="key">Weight / balance</td><td>Heavier &amp; head-light = stability + comfort; lighter = easier to swing</td></tr>
+          <tr><td class="key">Stiffness</td><td>Stiffer = more power but more shock to the arm; flexible = more comfort/control</td></tr>
+          <tr><td class="key">String pattern</td><td>Open (16×19) = more spin/power; dense (18×20) = control &amp; durability</td></tr>
+        </table>
+        <h3>Strings &amp; tension</h3>
+        <ul class="clean">
+          <li><b>Polyester (poly):</b> control + spin, stiff — popular but hardest on the arm.</li>
+          <li><b>Natural gut / multifilament:</b> power, comfort, arm-friendly; gut is priciest.</li>
+          <li><b>Tension:</b> <b>higher</b> = more control, less power; <b>lower</b> = more power &amp; comfort, more spin. Lower tension and softer strings ease elbow strain.</li>
+        </ul>
+        <div class="tip"><b>Arm health:</b> if you feel the elbow, the cheapest fixes are <b>lower tension</b>, a softer string (or thinner gauge), and a slightly more flexible frame — before changing technique.</div>
+      </section>
+
+      <!-- 16 mental -->
+      <section id="mental" class="card">
+        <h2><span class="num">16</span>Mental &amp; Match Play</h2>
+        <ul class="clean">
+          <li><b>Between-points routine:</b> turn to the back fence, breathe, reset — a fixed ritual steadies nerves and tempo.</li>
+          <li><b>Play the big points simply:</b> on break/set points go to your highest-percentage pattern, not your flashiest shot.</li>
+          <li><b>Score awareness:</b> 30-0 / 40-15 are free points to take a risk; 30-30 and deuce are when discipline pays.</li>
+          <li><b>Control the controllables:</b> effort, attitude, footwork, routine — not the call, the wind, or the last miss.</li>
+          <li><b>Momentum &amp; tactics:</b> when losing, change something — height, spin, pace, position — to break your opponent's rhythm.</li>
+          <li><b>Body language:</b> stay positive between points; visible frustration hands the opponent confidence.</li>
+        </ul>
+        <div class="tip"><b>One point at a time:</b> you can't win the match on any single point, but you can lose your composure on one. Win the next point.</div>
+      </section>
+
+      <!-- 17 fitness -->
+      <section id="fitness" class="card">
+        <h2><span class="num">17</span>Conditioning &amp; Training</h2>
+        <table>
+          <tr><th>Dimension</th><th>Focus</th></tr>
+          <tr><td class="key">Energy systems</td><td>Mostly anaerobic intervals (short sprints + recovery) over an aerobic base</td></tr>
+          <tr><td class="key">Power</td><td>Box jumps, medicine-ball throws, short sprints — improve first step and racket-head speed</td></tr>
+          <tr><td class="key">Agility</td><td>Ladder drills, suicides, change-of-direction work — sharpen split step and recovery</td></tr>
+          <tr><td class="key">Core</td><td>Anti-rotation (planks, wood-chops) to transmit the kinetic chain</td></tr>
+          <tr><td class="key">Mobility / prevention</td><td>Rotator cuff, hips, wrists, ankles; dynamic warm-up before, stretch after</td></tr>
+          <tr><td class="key">Recovery</td><td>Sleep, hydration, nutrition, and load management are the real keys to staying injury-free</td></tr>
+        </table>
+        <div class="tip"><b>Common overuse injuries:</b> tennis elbow (lateral), rotator cuff, knees and Achilles. A clean kinetic chain plus appropriate string tension protects the elbow more than "just hitting more."</div>
+      </section>
+
+      <!-- 18 terms -->
+      <section id="terms" class="card">
+        <h2><span class="num">18</span>Terminology</h2>
+        <div class="glossary">
+          <div><b>Ace</b> — winning serve the returner can't touch</div>
+          <div><b>Double Fault</b> — two missed serves, point lost</div>
+          <div><b>Break Point</b> — return point to win opponent's serve game</div>
+          <div><b>Hold</b> — winning your own service game</div>
+          <div><b>Deuce</b> — 40-40</div>
+          <div><b>Advantage</b> — leading by one point after deuce</div>
+          <div><b>Rally</b> — extended exchange of shots</div>
+          <div><b>Winner</b> — shot the opponent can't reach</div>
+          <div><b>Unforced Error</b> — a miss not forced by the opponent</div>
+          <div><b>Lob</b> — high ball over the net player</div>
+          <div><b>Drop Shot</b> — soft shot dropping just over the net</div>
+          <div><b>Approach Shot</b> — shot hit while moving in to net</div>
+          <div><b>Passing Shot</b> — shot past the net player</div>
+          <div><b>Poach</b> — doubles net interception</div>
+          <div><b>Let</b> — replayed point / serve</div>
+          <div><b>Foot Fault</b> — touching the line while serving</div>
+          <div><b>Half-volley</b> — ball played just after the bounce</div>
+          <div><b>Bagel</b> — winning a set 6-0</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Tennis Cheat Sheet · Advanced Edition &nbsp;·&nbsp; watch the ball, set your feet, cut the errors &nbsp;·&nbsp; play well</footer>
+  </div>
+
+<script>
+  var links = document.querySelectorAll('nav.toc a');
+  var map = {};
+  links.forEach(function(l){ map[l.getAttribute('href').slice(1)] = l; });
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        if(map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin:'-10% 0px -75% 0px' });
+  document.querySelectorAll('main section').forEach(function(s){ observer.observe(s); });
+</script>
+</body>
+</html>
